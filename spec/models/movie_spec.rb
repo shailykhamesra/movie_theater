@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 RSpec.describe Movie, type: :model do
   context 'validation test' do
     it 'is invalid without a name' do 
