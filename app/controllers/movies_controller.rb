@@ -11,7 +11,7 @@ class MoviesController < ApplicationController
       begin
         @movie = Movie.find(params[:id])
         format.json { render json: { movie: @movie }, status: :ok }
-      rescue StandardError => e
+      rescue => e
         format.json { render json: { error: e.message }, status: :unprocessable_entity }
       end
     end
@@ -29,7 +29,7 @@ class MoviesController < ApplicationController
       begin
         @movie = Movie.find(params[:id])
         format.json { render json: { movie: @movie }, status: :ok }
-      rescue StandardError => e
+      rescue => e
         format.json { render json: { error: e.message }, status: :unprocessable_entity }
       end
     end
@@ -44,7 +44,7 @@ class MoviesController < ApplicationController
         else
           format.json { render json: { error: @movie.errors }, status: :unprocessable_entity }
         end
-      rescue StandardError => e
+      rescue => e
         format.json { render json: { error: e.message }, status: :unprocessable_entity }
       end
     end
@@ -59,7 +59,7 @@ class MoviesController < ApplicationController
         else
           format.json { render json: { error: @movie.errors }, status: :unprocessable_entity }
         end
-      rescue StandardError => e
+      rescue => e
         format.json { render json: { error: e.message }, status: :unprocessable_entity }
       end
     end
@@ -74,7 +74,7 @@ class MoviesController < ApplicationController
         else
           format.json { render json: { error: @movie.errors }, status: :unprocessable_entity }
         end
-      rescue StandardError => e
+      rescue => e
         format.json { render json: { movie: @movie }, status: :unprocessable_entity }
       end
     end

@@ -11,7 +11,7 @@ class ShowtimesController < ApplicationController
       begin
         @showtime = Showtime.find(params[:id])
         format.json { render json: { showtime: @showtime }, status: :ok }
-      rescue StandardError => e
+      rescue => e
         format.json { render json: { error: e.message }, status: :unprocessable_entity }
       end
     end
@@ -29,7 +29,7 @@ class ShowtimesController < ApplicationController
       begin
         @showtime = Showtime.find(params[:id])
         format.json { render json: { showtime: @showtime }, status: :ok }
-      rescue StandardError => e
+      rescue => e
         format.json { render json: { error: e.message }, status: :unprocessable_entity }
       end
     end
@@ -44,7 +44,7 @@ class ShowtimesController < ApplicationController
         else
           format.json { render json: { showtime: @showtime }, status: :unprocessable_entity }
        end
-      rescue StandardError => e
+      rescue => e
         format.json { render json: { error: e.message }, status: :unprocessable_entity }
       end
     end
@@ -59,7 +59,7 @@ class ShowtimesController < ApplicationController
         else
           format.json { render json: { showtime: @showtime.errors }, status: :unprocessable_entity }
         end
-      rescue StandardError => e
+      rescue => e
         format.json { render json: { error: e.message }, status: :unprocessable_entity }
       end
     end
@@ -74,7 +74,7 @@ class ShowtimesController < ApplicationController
         else
           format.json { render json: { showtime: @showtime.errors }, status: :unprocessable_entity }
        end
-      rescue StandardError => e
+      rescue => e
         format.json { render json: { error: e.message }, status: :unprocessable_entity }
       end
     end

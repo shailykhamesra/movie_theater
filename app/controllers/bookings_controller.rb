@@ -29,7 +29,7 @@ class BookingsController < ApplicationController
       begin
         @booking = Booking.find(params[:id])
         format.json { render json: { booking: @booking }, status: :ok }
-      rescue StandardError => e
+      rescue => e
         format.json { render json: { error: e.message }, status: :unprocessable_entity}
       end
     end
@@ -44,7 +44,7 @@ class BookingsController < ApplicationController
         else
           format.json { render json: { error: @booking.errors }, status: :unprocessable_entity }
         end
-      rescue StandardError => e
+      rescue => e
         format.json { render json: { error: e.message }, status: :unprocessable_entity }
       end
     end
@@ -59,7 +59,7 @@ class BookingsController < ApplicationController
         else
           format.json { render json: { error: @booking.errors }, status: :unprocessable_entity }
         end
-      rescue StandardError => e
+      rescue => e
         format.json { render json: { error: e.message }, status: :unprocessable_entity }
       end
     end
@@ -74,7 +74,7 @@ class BookingsController < ApplicationController
         else
           format.json { render json: { error: @booking.errors }, status: :unprocessable_entity }
         end
-      rescue StandardError => e
+      rescue => e
         format.json { render json: { booking: @booking }, status: :unprocessable_entity }
       end
     end

@@ -11,7 +11,7 @@ class TicketsController < ApplicationController
       begin
         @ticket = Ticket.find(params[:id])
         format.json { render json: { ticket: @ticket }, status: :ok }
-      rescue StandardError => e
+      rescue => e
         format.json { render json: { error: e.message }, status: :unprocessable_entity }
       end
     end
@@ -29,7 +29,7 @@ class TicketsController < ApplicationController
       begin
         @ticket = Ticket.find(params[:id])
         format.json { render json: { ticket: @ticket }, status: :ok }
-      rescue StandardError => e
+      rescue => e
         format.json { render json: { error: e.message }, status: :unprocessable_entity }
       end
     end
@@ -44,7 +44,7 @@ class TicketsController < ApplicationController
         else
           format.json { render json: { error: @ticket.errors }, status: :unprocessable_entity }
         end
-      rescue StandardError => e
+      rescue => e
         format.json { render json: { error: e.message }, status: :unprocessable_entity }
       end
     end
@@ -59,7 +59,7 @@ class TicketsController < ApplicationController
         else
           format.json { render json: { error: @ticket.errors }, status: :unprocessable_entity }
         end
-      rescue StandardError => e
+      rescue => e
         format.json { render json: { error: e.message }, status: :unprocessable_entity }
       end
     end
@@ -74,7 +74,7 @@ class TicketsController < ApplicationController
         else
           format.json { render json: { error: @ticket.errors }, status: :unprocessable_entity }
         end
-      rescue StandardError => e
+      rescue => e
         format.json { render json: { ticket: @ticket }, status: :unprocessable_entity }
       end
     end
