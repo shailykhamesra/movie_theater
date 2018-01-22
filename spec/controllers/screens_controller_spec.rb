@@ -36,7 +36,7 @@ RSpec.describe ScreensController, type: :controller do
     it 'should get new screen successfully' do
       theater = FactoryGirl.create(:theater)
       movie = FactoryGirl.create(:movie)
-      get :new, params:{screen:{number: '1', theater_id: theater.id, movie_id: movie.id}}, format: 'json'
+      get :new, params:{screen:{number: nil, theater_id: theater.id, movie_id: movie.id}}, format: 'json'
       response.should have_http_status(:ok)
     end
   end
@@ -73,7 +73,9 @@ RSpec.describe ScreensController, type: :controller do
   context 'PUT update' do
     it 'should be valid screen updation' do
       screen = FactoryGirl.create(:screen)
-      put :update, params: { id: screen.id,screen:{number: screen.number} }, format: 'json'
+      put :update, params: { id: screen.id,screen:{number: '1'} }, format: 'json'
+      screen1=Screen.last
+      screen1.number.should eq 1
       response.should have_http_status(:ok)
     end
     it 'should not be valid screen updation' do

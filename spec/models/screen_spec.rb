@@ -32,19 +32,19 @@ RSpec.describe Screen, type: :model do
       showtime3 = FactoryGirl.create(:showtime, screen_id: screen.id)
       showtime1.screen.id.should eq screen.id and showtime2.screen.id.should eq screen.id and showtime3.screen.id.should eq screen.id
     end  
-    it 'should belongs to theater' do
+    it 'should not belongs to theater' do
       theater1= FactoryGirl.create(:theater)
       theater2= FactoryGirl.create(:theater)
       screen = FactoryGirl.create(:screen ,theater_id: theater1.id)
       screen.theater_id.should_not eq theater2.id
     end
-    it 'should belongs to movie' do
+    it 'should belongs not to movie' do
       movie1= FactoryGirl.create(:movie)
       movie2= FactoryGirl.create(:movie)
       screen = FactoryGirl.create(:screen ,movie_id: movie1.id)
       screen.movie_id.should_not eq movie2.id
     end
-    it 'should have many showtimes' do
+    it 'should not have many showtimes' do
       screen1 = FactoryGirl.create(:screen)
       screen2 = FactoryGirl.create(:screen)
       showtime1 = FactoryGirl.create(:showtime, screen_id: screen1.id)

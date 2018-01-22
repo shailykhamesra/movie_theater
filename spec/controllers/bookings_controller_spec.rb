@@ -22,7 +22,7 @@ RSpec.describe BookingsController, type: :controller do
   context 'GET new' do
     it 'should get new booking successfully' do
       booking = FactoryGirl.create(:booking)
-      get :new, params:{screen:{name:"qqq", phone:"1234567890", credircard:"1234567890", booking_id: booking.id}}, format: 'json'
+      get :new, params:{screen:{name: nil, phone: nil, credircard: nil, booking_id: booking.id}}, format: 'json'
       response.should have_http_status(:ok)
     end
   end
@@ -42,20 +42,22 @@ RSpec.describe BookingsController, type: :controller do
   context 'POST create' do
     it 'should be a valid booking creation' do
       showtime = FactoryGirl.create(:showtime)
-      post :create, params: { booking: { name:"qqq" , phone:"1234567890" , creditcard: "1234567890", showtime_id: showtime.id } }, format: 'json'
+      post :create, params: { booking: { name:  Faker::Name.name, phone: Faker::PhoneNumber.phone_number , creditcard: Faker::PhoneNumber.phone_number, showtime_id: showtime.id } }, format: 'json'
       response.should have_http_status(:ok)
     end
     it 'should not be a valid booking creation' do
       showtime1 = FactoryGirl.create(:showtime)
       showtime1.destroy
-      post :create, params:{ booking: { name:"qqq", phone:"1234567890" , creditcard: "1234567890", showtime_id: showtime1.id }}, format: 'json'
+      post :create, params:{ booking: { name: Faker::Name.name, phone: Faker::PhoneNumber.phone_number, creditcard: Faker::PhoneNumber.phone_number, showtime_id: showtime1.id }}, format: 'json'
       response.should have_http_status(:unprocessable_entity)
     end
   end
   context 'PUT update' do
     it 'should be valid booking updation' do
       booking = FactoryGirl.create(:booking)
-      put :update, params: { id: booking.id, booking: { name: booking.name, phone: booking.phone, creditcard:booking.creditcard } }, format: 'json'
+      put :update, params: { id: booking.id, booking: { name: 'a', phone: "1234577890", creditcard:"0987654321" } }, format: 'json'
+      booking1=Booking.last
+      booking1.name.should eq 'a'
       response.should have_http_status(:ok)
     end
     it 'should not be valid booking updation' do

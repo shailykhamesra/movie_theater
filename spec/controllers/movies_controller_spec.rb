@@ -21,9 +21,9 @@ RSpec.describe MoviesController, type: :controller do
   end
   context 'GET new' do
     it 'should get new movie successfully' do
-      movie = FactoryGirl.create(:movie)
-      movie.destroy
-      get :new, params:{movie:{name:movie.name}}, format: 'json'
+      #movie = FactoryGirl.create(:movie)
+      #movie.destroy
+      get :new, params:{movie:{name: nil}}, format: 'json'
       response.should have_http_status(:ok)
     end
   end
@@ -53,7 +53,9 @@ RSpec.describe MoviesController, type: :controller do
   context 'PUT update' do
     it 'should be valid movie updation' do
       movie = FactoryGirl.create(:movie)
-      put :update, params: { id: movie.id, movie: { name: movie.name } }, format: 'json'
+      put :update, params: { id: movie.id, movie: { name: 'a' } }, format: 'json'
+      movie1=Movie.last
+      movie1.name.should eq 'a'
       response.should have_http_status(:ok)
     end
     it 'should not be valid movie updation' do

@@ -23,7 +23,7 @@ RSpec.describe ShowtimesController, type: :controller do
     it 'should get new showtime successfully' do
       screen = FactoryGirl.create(:screen)
       movie = FactoryGirl.create(:movie)
-      get :new, params:{screen:{timings: "2017-02-02 22:02:30", screen_id: screen.id, movie_id: movie.id}}, format: 'json'
+      get :new, params:{screen:{timings: nil, screen_id: screen.id, movie_id: movie.id}}, format: 'json'
       response.should have_http_status(:ok)
     end
   end
@@ -43,7 +43,7 @@ RSpec.describe ShowtimesController, type: :controller do
   context 'POST create' do
     it 'should be a valid showtime creation' do
       movie = FactoryGirl.create(:movie)
-      screen = FactoryGirl.create(:screen)
+      screen = FactoryGirl.create(:screen, movie_id: movie.id)
       post :create, params: { showtime: { timings: "2017-02-02 22:02:30", movie_id: movie.id, screen_id: screen.id } }, format: 'json'
       response.should have_http_status(:ok)
     end
@@ -73,7 +73,8 @@ RSpec.describe ShowtimesController, type: :controller do
   context 'PUT update' do
     it 'should be valid movie updation' do
       showtime = FactoryGirl.create(:showtime)
-      put :update, params: { id: showtime.id, showtime: { timings: showtime.timings } }, format: 'json'
+      put :update, params: { id: showtime.id, showtime: { timings: "2017-02-02" } }, format: 'json'
+      showtime1=Showtime.last
       response.should have_http_status(:ok)
     end
     it 'should not be valid screen updation' do

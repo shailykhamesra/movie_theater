@@ -23,7 +23,7 @@ RSpec.describe TicketsController, type: :controller do
     it 'should get new ticket successfully' do
       showtime = FactoryGirl.create(:showtime)
       booking = FactoryGirl.create(:booking)
-      get :new, params:{ticket:{price: '1', showtime_id: showtime.id, booking_id: booking.id}}, format: 'json'
+      get :new, params:{ticket:{price: nil, showtime_id: showtime.id, booking_id: booking.id}}, format: 'json'
       response.should have_http_status(:ok)
     end
   end
@@ -73,7 +73,9 @@ RSpec.describe TicketsController, type: :controller do
   context 'PUT update' do
     it 'should be valid movie updation' do
       ticket = FactoryGirl.create(:ticket)
-      put :update, params: { id: ticket.id, ticket: { price: ticket.price } }, format: 'json'
+      put :update, params: { id: ticket.id, ticket: { price: '1' } }, format: 'json'
+      ticket1=Ticket.last
+      ticket1.price.should eq 1
       response.should have_http_status(:ok)
     end
     it 'should not be valid ticket updation' do
